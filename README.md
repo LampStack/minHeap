@@ -1,1 +1,1 @@
-<b>minHeap Tree Class</b>
+<h1>minHeap Tree Class</h1>
