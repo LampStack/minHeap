@@ -1,3 +1,4 @@
+from tempfile import TemporaryDirectory
 import networkx as nx
 import matplotlib.pyplot as plt
 import os
@@ -65,9 +66,9 @@ class MinHeap :
         self.treeSort(1) # use sort method to sort the tree
 
 
-    def show(self) -> None :
+    def showGUI(self) -> None :
         G = nx.DiGraph()
-        for i in range(1, (self.size//2)+1): # from 1 to the last parent !
+        for i in range(1, (self.size//2) + 1 ): # from 1 to the last parent !
             if self.heapArray[self.leftChild(i)] != '':
                 G.add_edge(self.heapArray[i], self.heapArray[self.leftChild(i)]) # parent and left
             if self.heapArray[self.rightChild(i)] != '':
@@ -76,6 +77,21 @@ class MinHeap :
         plt.show() #show GUI tree
 
 
+    def showWords(self) -> None :
+        wordsArray = [] # Add parent and childs sorted in a list
+        for i in range(1, (self.size//2) + 1 ): # from 1 to the last parent !
+            if self.heapArray[i] not in wordsArray : wordsArray.append(self.heapArray[i])
+            if self.heapArray[self.leftChild(i)] != '' and self.heapArray[self.leftChild(i)] not in wordsArray :
+                wordsArray.append(self.heapArray[self.leftChild(i)])
+            if self.heapArray[self.rightChild(i)] != '' and self.heapArray[self.rightChild(i)] not in wordsArray :
+                wordsArray.append(self.heapArray[self.rightChild(i)])
+        print("*** WORDS LIST ***")
+        for word in wordsArray :
+            print(word, end="\t")
+
+
 my_tree = MinHeap('data.txt')
-my_tree.remove()
-my_tree.show()
+# my_tree.add('tree')
+# my_tree.remove()
+# my_tree.showGUI()
+# my_tree.showWords()
